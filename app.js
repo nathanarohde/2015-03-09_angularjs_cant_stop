@@ -1,10 +1,16 @@
 var cantStop = angular.module('cantStop',['ui.router']);
 
 cantStop.config(function($stateProvider){
-  $stateProvider.state('home',{
+  $stateProvider.state('players',{
     url:'',
-    templateUrl: 'partials/home.html',
-    controller: 'homeCtrl'
+    templateUrl: 'partials/players.html',
+    controller: 'playersCtrl'
+  });
+
+  $stateProvider.state('game', {
+    url:'/game',
+    templateUrl: 'partials/game.html',
+    controller: 'gameCtrl'
   });
 
 });
