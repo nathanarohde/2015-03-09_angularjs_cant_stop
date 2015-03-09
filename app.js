@@ -1,6 +1,7 @@
 var cantStop = angular.module('cantStop',['ui.router']);
 
 cantStop.config(function($stateProvider){
+
   $stateProvider.state('players',{
     url:'',
     templateUrl: 'partials/players.html',
