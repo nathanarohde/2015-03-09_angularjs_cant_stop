@@ -20,9 +20,11 @@
       <p>Current choices: </p>
       <p ng-repeat='number in currentDiceRollChoices track by $index'> {{number}} </p>
 
-    <button ng-click='diceRoll()'>Roll dice!</button>
+    <button ng-show='!currentDiceRollChoices.length' ng-click='diceRoll()'>Start Turn!</button>
+
+    <p> Roll results </p>
     <div>
-      <span ng-repeat='die in dice'>{{die}} &nbsp </span>
+      <span ng-repeat='die in dice track by $index'>{{die}} &nbsp </span>
         <!-- <p>{{dice.die1}},{{dice.die2}},{{dice.die3}},{{dice.die4}}</p> -->
         <ul>
           <li ng-repeat='combo in pairs'>
