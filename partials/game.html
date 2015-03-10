@@ -22,7 +22,8 @@
 
     <button ng-click='diceRoll()'>Roll dice!</button>
     <div>
-        <p>{{dice.die1}},{{dice.die2}},{{dice.die3}},{{dice.die4}}</p>
+      <span ng-repeat='die in dice'>{{die}} &nbsp </span>
+        <!-- <p>{{dice.die1}},{{dice.die2}},{{dice.die3}},{{dice.die4}}</p> -->
         <ul>
           <li ng-repeat='combo in pairs'>
             <span ng-click='chooseDiceRolls(combo)'>
