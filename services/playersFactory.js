@@ -9,4 +9,5 @@ cantStop.factory('playersFactory', function playersFactory(){
   };
 
   return factory;
+  
 });
