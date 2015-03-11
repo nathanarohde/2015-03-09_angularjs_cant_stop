@@ -6,6 +6,7 @@ cantStop.controller('gameCtrl', function gameCtrl($scope, playersFactory, utilit
   $scope.currentPlayer = utilitiesFactory.findById(playersFactory.players, 1);
   $scope.currentDiceRollChoices = [ ]
   $scope.currentRollScore = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
+  $scope.choiceMade = false;
 
 
   $scope.diceRoll = function() {
@@ -55,16 +56,21 @@ cantStop.controller('gameCtrl', function gameCtrl($scope, playersFactory, utilit
         var number = combo[pair]
         if ($scope.currentDiceRollChoices.indexOf(number) != -1){
           $scope.currentRollScore[number - 2] += 1;
-          $scope.diceRoll();
         } else if ($scope.currentDiceRollChoices.length < 3) {
           $scope.currentDiceRollChoices.push(number);
           $scope.currentRollScore[number - 2] += 1;
-          $scope.diceRoll();
-        } else {
-        $scope.endOfTurn();
         }
+        $scope.choiceMadeToggle
       }
     };
+  };
+
+  $scope.choiceMadeToggle= function(){
+    if ($scope.choiceMade == false) {
+      $scope.choiceMade = true;
+    } else {
+      $scope.choiceMade = false;
+    }
   };
 
   $scope.stopTurn = function(){
@@ -78,12 +84,12 @@ cantStop.controller('gameCtrl', function gameCtrl($scope, playersFactory, utilit
   };
 
   $scope.endOfTurn = function() {
-    $scope.currentDiceRollChoices = [ ]
     if ($scope.currentPlayer.id < $scope.players.length) {
         $scope.currentPlayer = utilitiesFactory.findById(playersFactory.players, ($scope.currentPlayer.id + 1))
     } else {
         $scope.currentPlayer = utilitiesFactory.findById(playersFactory.players, 1)
     }
+    $scope.currentDiceRollChoices = [ ]
     $scope.currentRollScore = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
   };
 
