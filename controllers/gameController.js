@@ -2,7 +2,7 @@ cantStop.controller('gameCtrl', function gameCtrl($scope, playersFactory, utilit
   $scope.players = playersFactory.players;
   $scope.playersFactory = playersFactory;
   $scope.dice = [ ];
-  $scope.pairs = [ ];
+  $scope.pairSets = [ ];
   $scope.currentPlayer = utilitiesFactory.findById(playersFactory.players, 1);
   $scope.currentDiceRollChoices = [ ]
   $scope.currentRollScore = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]
@@ -11,7 +11,7 @@ cantStop.controller('gameCtrl', function gameCtrl($scope, playersFactory, utilit
 
   $scope.diceRoll = function() {
     $scope.dice = [ ]
-    $scope.pairs = [ ]
+    $scope.pairSets = [ ]
     for(i=0; i< 4; i++) {
       $scope.dice.push(Math.ceil(6*Math.random()));
     }
@@ -20,9 +20,11 @@ cantStop.controller('gameCtrl', function gameCtrl($scope, playersFactory, utilit
 
   $scope.rollPairs = function() {
 
-    $scope.pairs.push({pair1: ($scope.dice[0] + $scope.dice[1]), pair2: ($scope.dice[2] + $scope.dice[3])});
-    $scope.pairs.push({pair1: ($scope.dice[0] + $scope.dice[2]), pair2: ($scope.dice[1] + $scope.dice[3])});
-    $scope.pairs.push({pair1: ($scope.dice[0] + $scope.dice[3]), pair2: ($scope.dice[1] + $scope.dice[2])});
+    $scope.pairSets.push({set: [{pair: ($scope.dice[0] + $scope.dice[1]), selected:false}, {pair: ($scope.dice[2] + $scope.dice[3]), selected:false}]});
+    $scope.pairSets.push({set: [{pair: ($scope.dice[0] + $scope.dice[2]), selected:false}, {pair: ($scope.dice[1] + $scope.dice[3]), selected:false}]});
+    $scope.pairSets.push({set: [{pair: ($scope.dice[0] + $scope.dice[3]), selected:false}, {pair: ($scope.dice[1] + $scope.dice[2]), selected:false}]});
+    // $scope.pairSet.push({pair1: ($scope.dice[0] + $scope.dice[2]), pair2: ($scope.dice[1] + $scope.dice[3])});
+    // $scope.pairSet.push({pair1: ($scope.dice[0] + $scope.dice[3]), pair2: ($scope.dice[1] + $scope.dice[2])});
   };
 
 //   $scope.isValidRoll = function() {
