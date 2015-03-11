@@ -9,7 +9,8 @@
     <div>
       <ul>
         <li ng-repeat='player in players'>
-          <p>Player{{player.id}}:</p>
+          <p>Player{{player.id}}: {{player.playerScore}}</p>
+          <!-- <span ng-repeat='score in player.playerScore'>&nbsp {{score}} , </span> -->
         </li>
       </ul>
     </div>
@@ -33,6 +34,7 @@
             </span>
           </li>
         </ul>
+        <button ng-show='currentDiceRollChoices.length' ng-click='stopTurn()'>Stop.</button>
     </div>
 
 
