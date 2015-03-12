@@ -16,6 +16,7 @@ cantStop.controller('gameCtrl', function gameCtrl($scope, playersFactory, utilit
       $scope.dice.push(Math.ceil(6*Math.random()));
     }
     $scope.rollPairs();
+    $scope.choiceMade = false;
   };
 
   $scope.rollPairs = function() {
@@ -23,8 +24,6 @@ cantStop.controller('gameCtrl', function gameCtrl($scope, playersFactory, utilit
     $scope.pairSets.push({set: [{pair: ($scope.dice[0] + $scope.dice[1]), selected:false}, {pair: ($scope.dice[2] + $scope.dice[3]), selected:false}]});
     $scope.pairSets.push({set: [{pair: ($scope.dice[0] + $scope.dice[2]), selected:false}, {pair: ($scope.dice[1] + $scope.dice[3]), selected:false}]});
     $scope.pairSets.push({set: [{pair: ($scope.dice[0] + $scope.dice[3]), selected:false}, {pair: ($scope.dice[1] + $scope.dice[2]), selected:false}]});
-    // $scope.pairSet.push({pair1: ($scope.dice[0] + $scope.dice[2]), pair2: ($scope.dice[1] + $scope.dice[3])});
-    // $scope.pairSet.push({pair1: ($scope.dice[0] + $scope.dice[3]), pair2: ($scope.dice[1] + $scope.dice[2])});
   };
 
 //   $scope.isValidRoll = function() {
@@ -68,10 +67,10 @@ cantStop.controller('gameCtrl', function gameCtrl($scope, playersFactory, utilit
   };
 
   $scope.choiceMadeToggle= function(){
-    if ($scope.choiceMade == false) {
-      $scope.choiceMade = true;
-    } else {
+    if ($scope.choiceMade === true) {
       $scope.choiceMade = false;
+    } else {
+      $scope.choiceMade = true;
     }
   };
 

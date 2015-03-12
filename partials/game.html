@@ -25,20 +25,18 @@
     <button ng-show='!currentDiceRollChoices.length' ng-click='diceRoll()'>Start Turn!</button>
 
     <div ng-click='choiceMadeToggle()' ng-show='!choiceMade'>
+
     <p> Roll results </p>
       <span ng-repeat='die in dice track by $index'>{{die}} &nbsp </span>
         <ul>
           <li ng-repeat='set in pairSets'>
-            <!-- <li ng-repeat='pair in set'> -->
-            <span ng-click='chooseDiceRolls()'>
-              <p>{{set.set[0]["pair"]}}, {{set.set[1]["pair"]}}</p>
-            </span>
-            <!-- </li> -->
+            <span ng-click='chooseDiceRolls(set.set[0])'>{{set.set[0]["pair"]}}</span>
+            <span ng-click='chooseDiceRolls(set.set[1])'>{{set.set[1]["pair"]}}</span>
           </li>
         </ul>
     </div>
-        <button ng-show='choiceMade' ng-click='stopTurn()'>Stop.</button>
-        <button ng-show='choiceMade' ng-click='diceRoll()'>Roll again.</button>
+        <button ng-click='stopTurn()'>Stop.</button>
+        <button ng-click='diceRoll()'>Roll again.</button>
 
 
 
