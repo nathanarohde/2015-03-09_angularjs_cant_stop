@@ -1,5 +1,5 @@
 cantStop.factory('playersFactory', function playersFactory(){
-  var factory ={}
+  var factory = { };
   factory.players = [ ];
 
   factory.createPlayers = function() {
