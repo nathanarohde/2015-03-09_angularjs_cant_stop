@@ -69,6 +69,7 @@ cantStop.controller('gameCtrl', function gameCtrl($scope, playersFactory, utilit
             if($scope.currentDiceRollChoices.indexOf(currentPair.pair) > -1) {
               currentPair.selectable = true;
             }
+            pairCounter +=1;
           }
           if (($scope.currentDiceRollChoices.indexOf(currentSet.set[0].pair) > -1) && ($scope.currentDiceRollChoices.indexOf(currentSet.set[1].pair) > -1)) {
             currentSet.entry = 'pair';
@@ -76,48 +77,9 @@ cantStop.controller('gameCtrl', function gameCtrl($scope, playersFactory, utilit
             currentSet.entry = 'solo';
           }
         }
-debugger;
         break;
     }
   };
-
-
-    //   else { }
-    //     if ($scope.currentDiceRollChoices.length === 3) {
-    //     for(var set in $scope.pairSets) {
-    //       var currentSet= $scope.pairSets[set[0]];
-    //       var pairCounter=0;
-    //         for(var pair in currentSet.set) {
-    //           var currentPair = currentSet.set[pairCounter];
-    //           if(currentDiceRollChoices.indexOf(currentPair.pair) > -1) {
-    //             currentPair.selectable = true;
-    //           }
-    //   }
-    // }
-
-//   $scope.isValidRoll = function() {
-//     if ($scope.currentDiceRollChoices.length < 3) {
-//       return true;
-//     } else if ($scope.compareChoicetoRoll() ) {
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   };
-//
-//   $scope.compareChoicetoRoll = function() {
-//     for (number in $scope.currentDiceRollChoices) {
-//       for (pair in $scope.pairs) {
-//         if ($scope.currentDiceRollChoices(number) === $scope.pairs(pair)){
-//
-// debugger;
-//           return true;
-//         }
-//       }
-//
-//     }
-//     return false;
-//   };
 
   $scope.chooseDiceRolls = function(combo) {
 
