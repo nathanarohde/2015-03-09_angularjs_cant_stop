@@ -21,25 +21,79 @@ cantStop.controller('gameCtrl', function gameCtrl($scope, playersFactory, utilit
 
   $scope.rollPairs = function() {
 
-    $scope.pairSets.push({set: [{pair: ($scope.dice[0] + $scope.dice[1]), selectable:false}, {pair: ($scope.dice[2] + $scope.dice[3]), selectable:false}]});
-    $scope.pairSets.push({set: [{pair: ($scope.dice[0] + $scope.dice[2]), selectable:false}, {pair: ($scope.dice[1] + $scope.dice[3]), selectable:false}]});
-    $scope.pairSets.push({set: [{pair: ($scope.dice[0] + $scope.dice[3]), selectable:false}, {pair: ($scope.dice[1] + $scope.dice[2]), selectable:false}]});
+    $scope.pairSets.push({set: [{pair: ($scope.dice[0] + $scope.dice[1]), selectable:false}, {pair: ($scope.dice[2] + $scope.dice[3]), selectable:false}], entry:'invalid'});
+    $scope.pairSets.push({set: [{pair: ($scope.dice[0] + $scope.dice[2]), selectable:false}, {pair: ($scope.dice[1] + $scope.dice[3]), selectable:false}], entry:'invalid'});
+    $scope.pairSets.push({set: [{pair: ($scope.dice[0] + $scope.dice[3]), selectable:false}, {pair: ($scope.dice[1] + $scope.dice[2]), selectable:false}], entry:'invalid'});
     $scope.isSelectable();
   };
 
   $scope.isSelectable = function() {
-    if ($scope.currentDiceRollChoices.length <= 1){
-      for(var set in $scope.pairSets) {
-        var currentSet= $scope.pairSets[set[0]];
-        var pairCounter=0;
+    switch($scope.currentDiceRollChoices.length) {
+      case 0:
+      case 1:
+        for(var set in $scope.pairSets) {
+          var currentSet= $scope.pairSets[set[0]];
+          currentSet.entry = 'pair';
+          var pairCounter=0;
           for(var pair in currentSet.set) {
             var currentPair = currentSet.set[pairCounter];
             currentPair.selectable = true;
             pairCounter +=1;
           }
         }
-      }
+        break;
+
+      case 2:
+        for(var set in $scope.pairSets) {
+          var currentSet= $scope.pairSets[set[0]];
+          var pairCounter=0;
+          for(var pair in currentSet.set) {
+            var currentPair = currentSet.set[pairCounter];
+            currentPair.selectable = true;
+            pairCounter +=1;
+          }
+          if (($scope.currentDiceRollChoices.indexOf(currentSet.set[0].pair) > -1) || ($scope.currentDiceRollChoices.indexOf(currentSet.set[1].pair) > -1)) {
+            currentSet.entry = 'pair';
+          } else {
+            currentSet.entry = 'solo';
+          }
+        }
+        break;
+
+      case 3:
+        for(var set in $scope.pairSets) {
+          var currentSet= $scope.pairSets[set[0]];
+          var pairCounter=0;
+          for(var pair in currentSet.set) {
+            var currentPair = currentSet.set[pairCounter];
+            if($scope.currentDiceRollChoices.indexOf(currentPair.pair) > -1) {
+              currentPair.selectable = true;
+            }
+          }
+          if (($scope.currentDiceRollChoices.indexOf(currentSet.set[0].pair) > -1) && ($scope.currentDiceRollChoices.indexOf(currentSet.set[1].pair) > -1)) {
+            currentSet.entry = 'pair';
+          } else if (($scope.currentDiceRollChoices.indexOf(currentSet.set[0].pair) > -1) || ($scope.currentDiceRollChoices.indexOf(currentSet.set[1].pair) > -1)) {
+            currentSet.entry = 'solo';
+          }
+        }
+debugger;
+        break;
     }
+  };
+
+
+    //   else { }
+    //     if ($scope.currentDiceRollChoices.length === 3) {
+    //     for(var set in $scope.pairSets) {
+    //       var currentSet= $scope.pairSets[set[0]];
+    //       var pairCounter=0;
+    //         for(var pair in currentSet.set) {
+    //           var currentPair = currentSet.set[pairCounter];
+    //           if(currentDiceRollChoices.indexOf(currentPair.pair) > -1) {
+    //             currentPair.selectable = true;
+    //           }
+    //   }
+    // }
 
 //   $scope.isValidRoll = function() {
 //     if ($scope.currentDiceRollChoices.length < 3) {
